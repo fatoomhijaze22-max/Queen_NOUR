@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎀 مفاجأة لست البنات 🎀</title>
+    <style>
+        body { background-color: #ffeef8; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: sans-serif; }
+        #box { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 20px #ffb6c1; text-align: center; border: 3px solid #ffb6c1; width: 85%; }
+        h1 { color: #d63384; font-size: 20px; line-height: 1.5; }
+        #btns { margin-top: 20px; }
+        button { background: #ffb6c1; border: none; padding: 10px 20px; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; }
+        input { padding: 10px; border-radius: 10px; border: 2px solid #ffb6c1; width: 70%; outline: none; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Hello_kit.png/220px-Hello_kit.png" width="100">
+        <div id="content">
+            <h1 id="text">أويييييه! أنا هالو كيتي.. ممكن أعرف شو اسم القمر؟</h1>
+            <input type="text" id="nameInp" placeholder="اكتبي اسمك هون...">
+            <br>
+            <button onclick="next()">إرسال 🎀</button>
+        </div>
+    </div>
+
+    <script>
+        let s = 0;
+        function next() {
+            let name = document.getElementById('nameInp').value;
+            if(!name && s === 0) return;
+            if (s === 0) {
+                document.getElementById('text').innerHTML = "يوبشني هالاسم يا " + name + "! ✨<br><br>في حدا هون عقلو طار وبدو يخبرك قصة.. عرفتي مين؟";
+                document.getElementById('nameInp').style.display = "none";
+                s++;
+            } else {
+                document.getElementById('content').innerHTML = "<h1>❤️❤️❤️<br>في الروح عشقٌ لا ينتهي..<br>فكيف لا تدمنكِ روحي وأنتِ دوائها؟<br>وإنَّ الروح إذا التقت بمن يشبهها.. اكتملت. ✨<br>❤️❤️❤️</h1>";
+            }
+        }
+    </script>
+</body>
+</html>
