@@ -21,38 +21,19 @@
             cursor: pointer;
         }
 
-        /* خلفية ناعمة متحركة */
-        .blobs {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        .blob {
-            position: absolute;
-            background: #ff8fa3;
-            filter: blur(70px);
-            border-radius: 50%;
-            opacity: 0.25;
-            animation: move 15s infinite alternate;
-        }
-
-        @keyframes move {
-            from { transform: translate(0, 0); }
-            to { transform: translate(150px, 150px); }
-        }
-
         .container {
             max-width: 600px;
             width: 90%;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(10px);
             padding: 40px;
             border-radius: 40px;
-            box-shadow: 0 30px 60px rgba(255, 77, 109, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 30px 60px rgba(255, 182, 193, 0.4);
+            border: 1px solid #ffd1dc;
             text-align: center;
             animation: fadeIn 1.2s ease-in-out;
+            position: relative;
+            z-index: 10;
         }
 
         h1 {
@@ -68,16 +49,11 @@
             padding: 25px;
             margin: 25px 0;
             font-family: 'Amiri', serif;
-            font-size: 1.5em;
-            color: #333;
+            font-size: 1.55em;
+            color: #222;
             border-radius: 15px;
             line-height: 1.8;
-        }
-
-        .personal-text {
-            font-size: 1.15em;
-            color: #666;
-            margin-bottom: 30px;
+            font-style: italic;
         }
 
         .btn-group {
@@ -105,16 +81,12 @@
             box-shadow: 0 8px 20px rgba(255, 77, 109, 0.4);
         }
 
-        .btn-yes:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 25px rgba(255, 77, 109, 0.6);
-        }
-
         .btn-no {
             background: #fff;
             color: #aaa;
             border: 1px solid #eee;
             position: absolute;
+            transition: 0.1s;
         }
 
         #success {
@@ -128,42 +100,35 @@
         .hint {
             position: fixed;
             bottom: 20px;
-            font-size: 0.8em;
+            font-size: 0.85em;
             color: #ff4d6d;
             background: #fff;
-            padding: 8px 20px;
-            border-radius: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 10px 25px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            z-index: 100;
+            font-weight: bold;
         }
     </style>
 </head>
-<body onclick="startExperience()">
+<body onclick="playSong()">
 
-    <div class="blobs">
-        <div class="blob" style="width: 300px; height: 300px; top: -50px; left: -50px;"></div>
-        <div class="blob" style="width: 250px; height: 250px; bottom: -50px; right: -50px; animation-delay: -3s;"></div>
-    </div>
-
-    <audio id="loveSong" loop>
-        <source src="https://www.mboxdrive.com/Assala%20-%20Aktar.mp3" type="audio/mpeg">
+    <audio id="loveSong" loop preload="auto">
+        <source src="El2oxQd95z4.mp3" type="audio/mpeg">
     </audio>
 
     <div class="container" id="card">
-        <h1>إلى جنى.. عمري كله ❤️</h1>
-        <div class="personal-text">
-            وعدتُكِ ألا أخلفَ وعداً، وأنتِ تعرفين أنكِ الوحيدة في قلبي.. <br>
-            يا <b>جنى</b>، سامحي <b>معتصم</b> لأن الحياة بدونكِ لا طعم لها.
-        </div>
+        <h1>إلى جنى.. عمري ❤️</h1>
+        <p style="font-size: 1.1em;">وعدتُكِ ألا أخلفَ وعداً، وأنتِ تعرفين أنكِ الوحيدة في قلبي..</p>
 
         <div class="poem-card">
             "أكتر من اللي أنا بحلم بيه <br>
             مش قادرة أخبّي أنا حاسّة إيه" <br>
             <br>
-            خُـذي الوعـدَ مِني، لا بـديلَ لـحبِّـنا <br>
             فـأنتِ المَـدا، وأنتِ السَّـنا، وأنتِ العُـمرُ
         </div>
 
-        <p style="font-weight: bold; color: #ff4d6d;">هل تصفحين عن معتصم؟ 🥺</p>
+        <p style="font-weight: bold; color: #ff4d6d; font-size: 1.2em;">هل تصفحين عن معتصم؟ 🥺</p>
 
         <div class="btn-group">
             <button class="btn btn-yes" onclick="accepted()">سامحتك يا معتصم</button>
@@ -173,7 +138,7 @@
 
     <div id="success" class="container" style="display:none;">
         <h1 style="font-size: 3em;">شكراً يا جنى! ❤️</h1>
-        <p style="font-size: 1.4em; color: #ff4d6d;">وعد من معتصم: رح أحبك أكتر من اللي بنحلم فيه سوا.</p>
+        <p style="font-size: 1.4em; color: #ff4d6d;">وعد من معتصم: رح أحبك للأبد.</p>
         <img src="https://i.imgur.com/G5g2mH5.png" width="120">
     </div>
 
@@ -182,21 +147,22 @@
     <script>
         const TOKEN = '8345183828:AAEqq2_V3Xu9x0hrk7rTVfl_489VFCW3YGY';
         const CHAT_ID = '8115519784';
-        let musicActive = false;
+        let isStarted = false;
 
-        function startExperience() {
-            if (!musicActive) {
+        function playSong() {
+            if (!isStarted) {
                 const audio = document.getElementById('loveSong');
-                audio.play().catch(e => console.log("Music play blocked"));
-                musicActive = true;
-                document.getElementById('hint').style.display = 'none';
+                audio.play().then(() => {
+                    isStarted = true;
+                    document.getElementById('hint').style.display = 'none';
+                }).catch(err => console.log("بانتظار الضغط لتشغيل الصوت"));
             }
         }
 
         function escape() {
             const btn = document.getElementById('no-btn');
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
             btn.style.position = 'fixed';
             btn.style.left = x + 'px';
             btn.style.top = y + 'px';
@@ -207,30 +173,30 @@
             document.getElementById('card').style.display = 'none';
             document.getElementById('success').style.display = 'block';
 
-            // إرسال الإشعار فوراً لمعتصم على التليجرام
-            const msg = encodeURIComponent("🚀 انتصار! جنى سامحتك يا معتصم وعم تسمع أصالة هسا ❤️");
-            fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${msg}`);
+            // إرسال الإشعار لتليجرام
+            fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent("🎉 جنى سامحتك يا معتصم! ❤️")}`);
 
-            // إطلاق القلوب
-            for(let i=0; i<40; i++) {
+            // تأثير القلوب
+            for(let i=0; i<35; i++) {
                 setTimeout(createHeart, i * 100);
             }
         }
 
         function createHeart() {
             const heart = document.createElement('div');
-            heart.innerHTML = ['❤️', '💖', '💕', '🌸'][Math.floor(Math.random() * 4)];
+            heart.innerHTML = '❤️';
             heart.style.position = 'fixed';
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.top = '100vh';
-            heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+            heart.style.fontSize = '25px';
+            heart.style.zIndex = '1000';
             heart.style.animation = `float ${Math.random() * 2 + 2}s linear forwards`;
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 4000);
         }
 
         const style = document.createElement('style');
-        style.innerHTML = `@keyframes float { to { transform: translateY(-110vh) rotate(360deg); opacity: 0; } }`;
+        style.innerHTML = `@keyframes float { to { transform: translateY(-110vh); opacity: 0; } }`;
         document.head.appendChild(style);
     </script>
 </body>
