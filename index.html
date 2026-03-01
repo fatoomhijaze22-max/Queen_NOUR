@@ -35,7 +35,7 @@
             100% { transform: translateY(110vh) translateX(20px); }
         }
 
-        /* كيتي المتحركة بفرح */
+        /* كيتي المجسمة الأصلية رجعت! */
         .kitty-character {
             position: fixed;
             bottom: 20px;
@@ -45,6 +45,7 @@
             cursor: pointer;
             animation: kittyHappy 2s infinite ease-in-out;
             transition: all 0.5s;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
         }
 
         @keyframes kittyHappy {
@@ -131,7 +132,7 @@
 
     <div id="bubble" class="speech-bubble">أهلاً تغريد! ممكن أحكي معك شوي؟ 🥺</div>
     <div class="kitty-character" onclick="chat()">
-        <img src="https://assets.stickpng.com/images/580b57fbd9996e24bc43bb92.png" style="width: 100%;" alt="Kitty">
+        <img src="https://i.ibb.co/3ykpY6v9/1000101754.png" style="width: 100%;" alt="3D Kitty Icon">
     </div>
 
     <div class="main-container" id="content">
@@ -147,7 +148,7 @@
             <iframe src="https://www.youtube.com/embed/SshsX6YI2jQ"></iframe>
         </div>
         
-        <p style="font-size: 1.1em; color: #555;">معتصم بيعرف إنه الزعل ما بيليق فيكي..</p>
+        <p style="font-size: 1.1em; color: #555;">معتصم بيعرف إنه الزعل ما بيليق فيكي.. ❤️</p>
         <p style="font-size: 1.1em; color: #d63384; font-weight: bold;">بتسامحيه ونرجع أحسن من الأول؟ 🥺</p>
         <button class="btn-yes" onclick="done()">سامحتك يا معتصم ❤️</button>
     </div>
@@ -178,7 +179,7 @@
         }
 
         function done() {
-            fetch(`https://api.telegram.org/bot8345183828:AAEqq2_V3Xu9x0hrk7rTVfl_489VFCW3YGY/sendMessage?chat_id=8115519784&text=${encodeURIComponent("🎉 تغريد سامحتك يا معتصم! الصلح تم وكيتي شاهدة! ❤️")}`);
+            fetch(`https://api.telegram.org/bot8345183828:AAEqq2_V3Xu9x0hrk7rTVfl_489VFCW3YGY/sendMessage?chat_id=8115519784&text=${encodeURIComponent("🎉 تغريد سامحتك يا معتصم! الصلح تم وكيتي المجسمة شاهدة! ❤️")}`);
             alert("أحلى خبر! معتصم هسا طاير من الفرح ❤️");
         }
     </script>
