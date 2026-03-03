@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>Hello Kitty</title>
+<title>For you</title>
 
 <style>
 html,body{
@@ -20,102 +20,97 @@ html,body{
   background:url("104be3a230ca00148c8b279c1395edcc.jpg") center/cover no-repeat;
 }
 
-/* كبييييييييرة جدًا */
+/* هالو كيتي ضخمة جدا */
 #kitty{
   position:absolute;
-  width:1000px;
+  width:620px;
   left:50%;
-  bottom:-500px;
+  top:110%;
   transform:translateX(-50%);
+  transition:top 2.5s ease,left 2s ease;
+  filter:drop-shadow(0 18px 30px rgba(0,0,0,.35));
+  animation:soft 4s infinite ease-in-out;
   cursor:pointer;
-  filter:drop-shadow(0 15px 30px rgba(0,0,0,.35));
-  transition:left 2.5s ease, top 2.5s ease, bottom 2s ease;
-  animation:softIdle 4s infinite ease-in-out;
-  z-index:3;
-}
-
-/* حركة أنثوية ناعمة */
-@keyframes softIdle{
-  0%{transform:translateX(-50%) rotate(0deg) scale(1);}
-  25%{transform:translateX(-50%) rotate(1.5deg) scale(1.02);}
-  50%{transform:translateX(-50%) rotate(0deg) scale(1.04);}
-  75%{transform:translateX(-50%) rotate(-1.5deg) scale(1.02);}
-  100%{transform:translateX(-50%) rotate(0deg) scale(1);}
-}
-
-/* بالون */
-#bubble{
-  position:absolute;
-  background:white;
-  padding:18px 22px;
-  border-radius:30px;
-  font-size:20px;
-  display:none;
-  box-shadow:0 10px 20px rgba(0,0,0,.25);
-  z-index:4;
-}
-
-/* ورد */
-.flower{
-  position:absolute;
-  font-size:26px;
-  animation:fall 3.5s linear forwards;
-  pointer-events:none;
   z-index:5;
 }
 
-@keyframes fall{
-  from{transform:translateY(-40px);opacity:1;}
-  to{transform:translateY(260px);opacity:0;}
+/* حركة أنثوية ناعمة */
+@keyframes soft{
+  0%{transform:translateX(-50%) rotate(0deg) scale(1);}
+  25%{transform:translateX(-50%) rotate(1.2deg) scale(1.02);}
+  50%{transform:translateX(-50%) rotate(0deg) scale(1.04);}
+  75%{transform:translateX(-50%) rotate(-1.2deg) scale(1.02);}
+  100%{transform:translateX(-50%) rotate(0deg) scale(1);}
+}
+
+/* بالون الكلام */
+#bubble{
+  position:absolute;
+  padding:18px 24px;
+  background:white;
+  border-radius:35px;
+  font-size:20px;
+  box-shadow:0 8px 20px rgba(0,0,0,.3);
+  display:none;
+  z-index:10;
 }
 
 /* قلوب */
 .heart{
   position:absolute;
-  font-size:22px;
-  animation:float 2.5s ease forwards;
+  font-size:26px;
+  animation:heartUp 2.5s ease forwards;
   pointer-events:none;
-  z-index:5;
+  z-index:9;
 }
-
-@keyframes float{
+@keyframes heartUp{
   from{transform:translateY(0) scale(1);opacity:1;}
-  to{transform:translateY(-120px) scale(1.4);opacity:0;}
+  to{transform:translateY(-140px) scale(1.4);opacity:0;}
 }
 
-/* لمعة تمشي معها */
-.spark{
+/* ورد */
+.flower{
   position:absolute;
-  font-size:18px;
-  animation:spark 1s linear forwards;
+  font-size:28px;
+  animation:flowerFall 3.5s linear forwards;
   pointer-events:none;
-  z-index:2;
+  z-index:9;
 }
-
-@keyframes spark{
-  from{opacity:1; transform:scale(1);}
-  to{opacity:0; transform:scale(1.6);}
+@keyframes flowerFall{
+  from{transform:translateY(-40px);opacity:1;}
+  to{transform:translateY(260px);opacity:0;}
 }
 
 /* رقصة */
 .dance{
   animation:dance 0.35s infinite alternate !important;
 }
-
 @keyframes dance{
-  from{transform:translateX(-50%) rotate(-7deg) scale(1.06);}
-  to{transform:translateX(-50%) rotate(7deg) scale(1.06);}
+  from{transform:translateX(-50%) rotate(-7deg) scale(1.05);}
+  to{transform:translateX(-50%) rotate(7deg) scale(1.05);}
+}
+
+/* نجوم خفيفة بالخلفية */
+.star{
+  position:absolute;
+  font-size:18px;
+  animation:fadeStar 1.5s linear forwards;
+  pointer-events:none;
+}
+@keyframes fadeStar{
+  from{opacity:1;}
+  to{opacity:0;transform:scale(1.8);}
 }
 
 #hint{
   position:absolute;
-  bottom:12px;
+  bottom:15px;
   width:100%;
   text-align:center;
   color:white;
-  font-size:16px;
+  font-size:17px;
   text-shadow:0 2px 6px rgba(0,0,0,.6);
-  z-index:6;
+  z-index:12;
 }
 </style>
 </head>
@@ -124,11 +119,8 @@ html,body{
 <div id="scene">
 
   <div id="bubble"></div>
-
   <img id="kitty" src="kitty.png">
-
-  <div id="hint">إلمسي هالو كيتي ✨</div>
-
+  <div id="hint">إلمسي هالو كيتي 🌸</div>
   <audio id="song" src="EI2oxQd95z4.mp3"></audio>
 
 </div>
@@ -137,26 +129,28 @@ html,body{
 const kitty  = document.getElementById("kitty");
 const bubble = document.getElementById("bubble");
 const song   = document.getElementById("song");
+const hint   = document.getElementById("hint");
 
 let started=false;
 let step=0;
 
 const texts=[
   "مرحبا يا جميلة 💗",
-  "اليوم شكلك يجنن ✨",
-  "لا تزعلـي أبداً 🌸",
-  "هاي ورد وقلوب إلك 💖",
-  "يلا نرقص سوااا 🎶"
+  "في ناس وجودهم يفرّق كثير ✨",
+  "وأنتِ منهم 🌸",
+  "هاي قلوب وورد إلك 💖🌷",
+  "يلا نرقص سوا 🎶"
 ];
 
-/* دخول لطيف */
+/* دخول من تحت الشاشة */
 setTimeout(()=>{
-  kitty.style.bottom="10px";
+  kitty.style.top="25%";
 },500);
 
+/* تحريك ناعم بين أماكن */
 function moveSoft(){
-  const w=window.innerWidth-480;
-  const h=window.innerHeight-520;
+  const w=window.innerWidth-650;
+  const h=window.innerHeight-600;
 
   const x=Math.random()*w;
   const y=Math.random()*h;
@@ -165,14 +159,14 @@ function moveSoft(){
   kitty.style.top=y+"px";
 }
 
-/* كتابة ناعمة */
-function typeBubble(text){
-  bubble.innerText="";
+/* كتابة ناعمة بالبالون */
+function typeText(text){
   bubble.style.display="block";
+  bubble.innerText="";
 
   const r=kitty.getBoundingClientRect();
   bubble.style.left=(r.left+r.width/2)+"px";
-  bubble.style.top=(r.top-80)+"px";
+  bubble.style.top=(r.top-90)+"px";
   bubble.style.transform="translateX(-50%)";
 
   let i=0;
@@ -180,12 +174,26 @@ function typeBubble(text){
     bubble.innerText+=text[i];
     i++;
     if(i>=text.length) clearInterval(t);
-  },40);
+  },45);
 }
 
-/* ورد */
-function dropFlowers(){
+/* قلوب حولها */
+function hearts(){
+  const r=kitty.getBoundingClientRect();
   for(let i=0;i<10;i++){
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerText="💖";
+    h.style.left=(r.left+r.width/2+Math.random()*120-60)+"px";
+    h.style.top=(r.top+100)+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),2500);
+  }
+}
+
+/* ورد نازل */
+function flowers(){
+  for(let i=0;i<12;i++){
     const f=document.createElement("div");
     f.className="flower";
     f.innerText="🌸";
@@ -196,59 +204,50 @@ function dropFlowers(){
   }
 }
 
-/* قلوب */
-function heartsAround(){
-  const r=kitty.getBoundingClientRect();
-  for(let i=0;i<8;i++){
-    const h=document.createElement("div");
-    h.className="heart";
-    h.innerText="💖";
-    h.style.left=(r.left+r.width/2+Math.random()*60-30)+"px";
-    h.style.top=(r.top+60)+"px";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),2500);
-  }
-}
-
-/* لمعة تتبعها */
+/* نجوم لطيفة دايمًا */
 setInterval(()=>{
-  const r=kitty.getBoundingClientRect();
+  if(!started) return;
   const s=document.createElement("div");
-  s.className="spark";
+  s.className="star";
   s.innerText="✨";
-  s.style.left=(r.left+r.width/2+Math.random()*40-20)+"px";
-  s.style.top=(r.top+r.height/2)+"px";
+  s.style.left=Math.random()*window.innerWidth+"px";
+  s.style.top=Math.random()*window.innerHeight+"px";
   document.body.appendChild(s);
-  setTimeout(()=>s.remove(),1000);
-},600);
+  setTimeout(()=>s.remove(),1500);
+},400);
 
 function startShow(){
   if(started) return;
   started=true;
-  document.getElementById("hint").style.display="none";
+  hint.style.display="none";
 
   moveSoft();
-  typeBubble(texts[0]);
+  typeText(texts[0]);
+  hearts();
 
   const timer=setInterval(()=>{
 
     step++;
     moveSoft();
-    typeBubble(texts[step]);
+    typeText(texts[step]);
+
+    if(step===2){
+      hearts();
+    }
 
     if(step===3){
-      dropFlowers();
-      heartsAround();
+      hearts();
+      flowers();
     }
 
     if(step===4){
       song.play().catch(()=>{});
       kitty.classList.add("dance");
-      heartsAround();
+      hearts();
       clearInterval(timer);
     }
 
-  },2600);
+  },2800);
 }
 
 kitty.addEventListener("click",startShow);
@@ -257,4 +256,3 @@ kitty.addEventListener("touchstart",startShow);
 
 </body>
 </html>
-
